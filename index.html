@@ -29,11 +29,46 @@
       --t-xl: clamp(1.6rem, 4vw, 2.2rem);
       --t-hero: clamp(2.2rem, 7vw, 4.6rem);
     }
-    [data-theme=amber] { --bg: #0d0905; --panel: #16100a; --line: #3a2a14; --text: #ffe9c7; --muted: #b59a72; --accent: #ffb000; --on-accent: #1a1000; --glow: rgba(255,176,0,.35) }
-    [data-theme=cyan] { --bg: #04090e; --panel: #0a141c; --line: #16303f; --text: #d3f1ff; --muted: #7aa6bb; --accent: #27d7ff; --on-accent: #021219; --glow: rgba(39,215,255,.35) }
-    [data-theme=magenta] { --bg: #0b050c; --panel: #150a17; --line: #3a1840; --text: #fbdcff; --muted: #b384ba; --accent: #ff3df0; --on-accent: #1b021a; --glow: rgba(255,61,240,.35) }
-    [data-theme=paper] { --bg: #f4f6f2; --panel: #ffffff; --line: #c9d3c8; --text: #14201a; --muted: #4b5f52; --accent: #0a7a3d; --on-accent: #ffffff; --glow: rgba(10,122,61,.2) }
-    
+    [data-theme=amber] {
+      --bg: #0d0905;
+      --panel: #16100a;
+      --line: #3a2a14;
+      --text: #ffe9c7;
+      --muted: #b59a72;
+      --accent: #ffb000;
+      --on-accent: #1a1000;
+      --glow: rgba(255,176,0,.35)
+    }
+    [data-theme=cyan] {
+      --bg: #04090e;
+      --panel: #0a141c;
+      --line: #16303f;
+      --text: #d3f1ff;
+      --muted: #7aa6bb;
+      --accent: #27d7ff;
+      --on-accent: #021219;
+      --glow: rgba(39,215,255,.35)
+    }
+    [data-theme=magenta] {
+      --bg: #0b050c;
+      --panel: #150a17;
+      --line: #3a1840;
+      --text: #fbdcff;
+      --muted: #b384ba;
+      --accent: #ff3df0;
+      --on-accent: #1b021a;
+      --glow: rgba(255,61,240,.35)
+    }
+    [data-theme=paper] {
+      --bg: #f4f6f2;
+      --panel: #ffffff;
+      --line: #c9d3c8;
+      --text: #14201a;
+      --muted: #4b5f52;
+      --accent: #0a7a3d;
+      --on-accent: #ffffff;
+      --glow: rgba(10,122,61,.2)
+    }
     * { box-sizing: border-box; margin: 0; }
     html { scroll-behavior: smooth; scroll-padding-top: calc(4.5rem + env(safe-area-inset-top,0px)); }
     body { background: var(--bg); color: var(--text); font: var(--t-base)/1.65 var(--sans); padding-top: env(safe-area-inset-top,0px); padding-bottom: env(safe-area-inset-bottom,0px); transition: background .3s, color .3s; position: relative; }
@@ -46,7 +81,6 @@
     h3 { font: 700 var(--t-lg)/1.3 var(--sans); }
     p+p { margin-top: var(--s2); }
     .muted { color: var(--muted); }
-    
     header { position: sticky; top: 0; z-index: 20; background: color-mix(in srgb, var(--bg) 78%, transparent); backdrop-filter: saturate(1.4) blur(14px); border-bottom: 1px solid var(--line); padding-top: env(safe-area-inset-top,0px); }
     nav { display: flex; align-items: center; gap: .6rem 1rem; justify-content: space-between; flex-wrap: wrap; padding: .7rem var(--s3); max-width: 1040px; margin: 0 auto; }
     .logo { font: 700 1.05rem var(--sans); text-decoration: none; color: var(--text); display: flex; align-items: center; gap: .55rem; }
@@ -56,14 +90,12 @@
     nav li a { display: block; color: var(--muted); text-decoration: none; padding: .4rem .9rem; border-radius: 999px; white-space: nowrap; transition: color .3s, background .3s; }
     nav li a:hover { color: var(--text); background: var(--panel); }
     nav li a[aria-current=true] { color: var(--on-accent); background: var(--accent); }
-    
     .themes { display: flex; gap: .45rem; align-items: center; padding: .35rem .6rem; border: 1px solid var(--line); border-radius: 999px; background: var(--panel); }
     .themes button { width: 1.1rem; height: 1.1rem; border-radius: 50%; border: 2px solid transparent; cursor: pointer; padding: 0; transition: transform .25s ease, border-color .25s ease; }
     .themes button:hover { transform: scale(1.18); }
     .themes button[aria-pressed=true] { border-color: var(--text); box-shadow: none; }
     .themes .shuffle { width: 1.4rem; height: 1.4rem; padding: 0; border-radius: 50%; border: 0; background: none; font-size: 1rem; color: var(--muted); display: grid; place-items: center; cursor: pointer; }
     .themes .shuffle:hover { color: var(--accent); transform: rotate(180deg); }
-    
     #top { border-top: 0; padding-top: var(--s5); position: relative; overflow: hidden; }
     #matrix-canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; opacity: 0.15; z-index: 1; transition: opacity .4s ease; }
     [data-theme=paper] #matrix-canvas { opacity: 0 !important; }
@@ -75,13 +107,11 @@
     .role { font: 500 var(--t-lg) var(--sans); color: var(--accent); margin: var(--s2) 0; }
     .value { max-width: 56ch; font-size: var(--t-lg); margin-bottom: var(--s3); }
     .cta { display: flex; flex-wrap: wrap; gap: var(--s2); }
-    
     .btn { display: inline-block; font: 600 var(--t-base) var(--sans); padding: .8rem 1.5rem; border: 2px solid var(--accent); text-decoration: none; border-radius: 999px; transition: box-shadow .3s, transform .3s, background .3s, color .3s; }
     .btn.primary { background: var(--accent); color: var(--on-accent); }
     .btn.ghost { color: var(--accent); background: transparent; }
     .btn:hover { box-shadow: 0 0 18px var(--glow); transform: translateY(-2px); }
     .btn.ghost:hover { background: var(--accent); color: var(--on-accent); }
-    
     .two { display: grid; gap: var(--s4); grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
     .term { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: var(--s1) var(--s3); display: grid; grid-template-columns: auto 1fr; column-gap: var(--s3); line-height: 1.5; transition: transform .35s, border-color .35s, box-shadow .35s; }
     .term dt, .term dd { margin: 0; padding: .8rem 0; border-bottom: 1px solid var(--line); }
@@ -89,24 +119,18 @@
     .term dd { color: var(--text); }
     .term dt:nth-last-of-type(1), .term dd:last-of-type { border-bottom: 0; }
     .term:hover { transform: translateY(-4px); border-color: var(--accent); box-shadow: 0 14px 32px -16px var(--glow); }
-    
     .grid { display: grid; gap: var(--s3); grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
     .card { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: var(--s3); transition: transform .35s, border-color .35s, box-shadow .35s; display: flex; flex-direction: column; justify-content: space-between; }
     .card h3 { margin-bottom: var(--s2); color: var(--accent); }
     .card p { margin: var(--s1) 0 var(--s2); }
     .card:hover { transform: translateY(-4px); border-color: var(--accent); box-shadow: 0 14px 32px -16px var(--glow); }
-    
-    .shot { width: 100%; aspect-ratio: 16/9; border-radius: 4px; margin-bottom: var(--s2); object-fit: cover; border: 1px solid var(--line); background: #111; }
-    
     .tags { display: flex; flex-wrap: wrap; gap: .45rem; list-style: none; padding: 0; margin-top: auto; }
     .tags li { font: var(--t-sm) var(--sans); padding: .2rem .6rem; border: 1px solid var(--line); border-radius: 3px; transition: border-color .25s, color .25s; }
     .tags li:hover { border-color: var(--accent); color: var(--accent); }
-    
     footer { text-align: center; padding: var(--s4) 0; border-top: 1px solid var(--line); color: var(--muted); font-size: var(--t-sm); margin-top: var(--s5); }
   </style>
 </head>
 <body>
-
   <header>
     <nav>
       <a href="#" class="logo"><div class="dot"></div> Og’abek</a>
@@ -118,7 +142,6 @@
       </ul>
     </nav>
   </header>
-
   <main class="wrap">
     <section id="top">
       <div class="glow"></div>
@@ -133,7 +156,6 @@
         </div>
       </div>
     </section>
-
     <section id="about">
       <h2>About Me</h2>
       <div class="two">
@@ -156,7 +178,6 @@
         </div>
       </div>
     </section>
-
     <section id="skills">
       <h2>Skills</h2>
       <div class="grid">
@@ -186,13 +207,11 @@
         </div>
       </div>
     </section>
-
     <section id="projects">
       <h2>Projects</h2>
       <div class="grid">
         <div class="card">
           <div>
-            <img src="portfolio-home.png" alt="Personal frontend portfolio" class="shot">
             <h3>Personal frontend portfolio</h3>
             <p class="muted">Problem: I had no single place to show skills, chess results and contact details. Result: one responsive page with five switchable color themes.</p>
           </div>
@@ -202,10 +221,8 @@
             <li>JavaScript</li>
           </ul>
         </div>
-
         <div class="card">
           <div>
-            <img src="github-profile.png" alt="GitHub profile" class="shot">
             <h3>GitHub profile</h3>
             <p class="muted">Problem: practice code was scattered across folders. Result: repositories collected in one profile where I track my progress.</p>
           </div>
@@ -216,7 +233,6 @@
         </div>
       </div>
     </section>
-
     <section id="chess">
       <h2>Chess Certificates</h2>
       <div class="grid">
@@ -238,10 +254,8 @@
       </div>
     </section>
   </main>
-
   <footer>
     <p>&copy; 2026 Og’abek Norquvvatov. cryptotrader09122000@gmail.com · Termez, Uzbekistan</p>
   </footer>
-
 </body>
 </html>
