@@ -37,7 +37,7 @@
     * { box-sizing: border-box; margin: 0; }
     html { scroll-behavior: smooth; scroll-padding-top: calc(4.5rem + env(safe-area-inset-top,0px)); }
     body { background: var(--bg); color: var(--text); font: var(--t-base)/1.65 var(--sans); padding-top: env(safe-area-inset-top,0px); padding-bottom: env(safe-area-inset-bottom,0px); transition: background .3s, color .3s; position: relative; }
-    a { color: var(--accent); }
+    a { color: var(--accent); text-decoration: none; }
     :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
     .wrap { max-width: 1040px; margin: 0 auto; padding: 0 var(--s3); }
     section { padding: var(--s5) 0; border-top: 1px dashed var(--line); position: relative; z-index: 2; }
@@ -82,7 +82,7 @@
     .btn:hover { box-shadow: 0 0 18px var(--glow); transform: translateY(-2px); }
     .btn.ghost:hover { background: var(--accent); color: var(--on-accent); }
     
-    .two { display: grid; gap: var(--s4); }
+    .two { display: grid; gap: var(--s4); grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
     .term { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: var(--s1) var(--s3); display: grid; grid-template-columns: auto 1fr; column-gap: var(--s3); line-height: 1.5; transition: transform .35s, border-color .35s, box-shadow .35s; }
     .term dt, .term dd { margin: 0; padding: .8rem 0; border-bottom: 1px solid var(--line); }
     .term dt { color: var(--muted); }
@@ -90,299 +90,158 @@
     .term dt:nth-last-of-type(1), .term dd:last-of-type { border-bottom: 0; }
     .term:hover { transform: translateY(-4px); border-color: var(--accent); box-shadow: 0 14px 32px -16px var(--glow); }
     
-    .grid { display: grid; gap: var(--s3); }
-    .card { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: var(--s3); transition: transform .35s, border-color .35s, box-shadow .35s; }
+    .grid { display: grid; gap: var(--s3); grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+    .card { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: var(--s3); transition: transform .35s, border-color .35s, box-shadow .35s; display: flex; flex-direction: column; justify-content: space-between; }
     .card h3 { margin-bottom: var(--s2); color: var(--accent); }
     .card p { margin: var(--s1) 0 var(--s2); }
     .card:hover { transform: translateY(-4px); border-color: var(--accent); box-shadow: 0 14px 32px -16px var(--glow); }
     
-    .tags { display: flex; flex-wrap: wrap; gap: .45rem; list-style: none; padding: 0; }
+    .shot { width: 100%; aspect-ratio: 16/9; border-radius: 4px; margin-bottom: var(--s2); object-fit: cover; border: 1px solid var(--line); background: #111; }
+    
+    .tags { display: flex; flex-wrap: wrap; gap: .45rem; list-style: none; padding: 0; margin-top: auto; }
     .tags li { font: var(--t-sm) var(--sans); padding: .2rem .6rem; border: 1px solid var(--line); border-radius: 3px; transition: border-color .25s, color .25s; }
     .tags li:hover { border-color: var(--accent); color: var(--accent); }
     
-    .shot { aspect-ratio: 16/9; border-radius: 4px; margin-bottom: var(--s2); display: grid; place-items: center; font: 600 var(--t-sm) var(--sans); color: var(--on-accent); background: linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent) 25%, var(--bg))); text-align: center; padding: var(--s2); transition: filter .35s ease; }
-    .shot.b { background: repeating-linear-gradient(45deg, var(--line) 0 12px, var(--panel) 12px 24px); color: var(--text); }
-    .shot.c { background: linear-gradient(200deg, var(--panel), var(--accent)); }
-    .card:hover .shot { filter: brightness(1.08); }
-    .card .links { display: flex; gap: var(--s2); margin-top: var(--s2); font: var(--t-sm) var(--sans); }
-    
-    .certs { display: grid; gap: var(--s3); }
-    .cert { margin: 0; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; overflow: hidden; transition: transform .35s, border-color .35s, box-shadow .35s; }
-    .cert .frame { aspect-ratio: 4/3; position: relative; display: grid; place-items: center; background: repeating-conic-gradient(var(--line) 0 25%, var(--panel) 0 50%) 0 0/36px 36px; }
-    .cert img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; background: var(--panel); }
-    .cert .fallback { font: 600 var(--t-sm) var(--sans); background: var(--bg); padding: .4rem .7rem; border: 1px dashed var(--accent); color: var(--accent); }
-    .cert figcaption { padding: var(--s2); font: var(--t-sm)/1.5 var(--sans); }
-    .cert figcaption b { display: block; color: var(--accent); }
-    .cert:hover { transform: translateY(-4px); border-color: var(--accent); box-shadow: 0 14px 32px -16px var(--glow); }
-    
-    .tl { list-style: none; padding: 0 0 0 var(--s3); border-left: 2px solid var(--line); }
-    .tl li { position: relative; padding-bottom: var(--s3); transition: transform .3s ease; }
-    .tl li::before { content: ""; position: absolute; left: calc(-1 * var(--s3) - 7px); top: .45rem; width: 12px; height: 12px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 10px var(--glow); }
-    .tl time { font: var(--t-sm) var(--sans); color: var(--muted); }
-    .tl li:hover { transform: translateX(4px); }
-    
-    footer { border-top: 1px dashed var(--line); padding: var(--s5) 0 var(--s4); position: relative; z-index: 2; }
-    footer .big { font: 700 var(--t-xl) var(--sans); overflow-wrap: anywhere; }
-    .contact { display: flex; flex-wrap: wrap; gap: var(--s3); margin: var(--s3) 0; font: var(--t-base) var(--sans); list-style: none; padding: 0; }
-    
-    .hero > * { animation: rise .9s cubic-bezier(.2,.7,.2,1) both; }
-    .hero >:nth-child(2) { animation-delay: .08s }
-    .hero >:nth-child(3) { animation-delay: .16s }
-    .hero >:nth-child(4) { animation-delay: .24s }
-    .hero >:nth-child(5) { animation-delay: .32s }
-    @keyframes rise { from { opacity: 0; translate: 0 16px } to { opacity: 1; translate: 0 0 } }
-    
-    .js .reveal { opacity: 0; translate: 0 16px; transition: opacity .8s ease, translate .8s cubic-bezier(.2,.7,.2,1), transform .35s, border-color .35s, box-shadow .35s; }
-    .js .reveal.in { opacity: 1; translate: 0 0; }
-    
-    @media(min-width: 860px) { nav ul { order: 0; width: auto; overflow: visible; } }
-    @media(min-width: 720px) {
-      .two { grid-template-columns: 1.3fr 1fr; }
-      .grid.c3 { grid-template-columns: repeat(3, 1fr); }
-      .grid.c2 { grid-template-columns: repeat(2, 1fr); }
-      .certs { grid-template-columns: repeat(3, 1fr); }
-    }
-    @media(prefers-reduced-motion: reduce) {
-      * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
-      #matrix-canvas { display: none !important; }
-    }
+    footer { text-align: center; padding: var(--s4) 0; border-top: 1px solid var(--line); color: var(--muted); font-size: var(--t-sm); margin-top: var(--s5); }
   </style>
 </head>
 <body>
-  <canvas id="matrix-canvas"></canvas>
+
   <header>
-    <nav aria-label="Main">
-      <a class="logo" href="#top"><span class="dot"></span>Og’abek</a>
+    <nav>
+      <a href="#" class="logo"><div class="dot"></div> Og’abek</a>
       <ul>
-        <li><a href="#about">about</a></li>
-        <li><a href="#skills">skills</a></li>
-        <li><a href="#projects">projects</a></li>
-        <li><a href="#chess">chess</a></li>
-        <li><a href="#path">path</a></li>
-        <li><a href="#contact">contact</a></li>
+        <li><a href="#top" aria-current="true">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#chess">Chess</a></li>
       </ul>
-      <div class="themes" role="group" aria-label="Color theme">
-        <button type="button" data-set="matrix" style="background:#39ff88" aria-label="Matrix green theme" aria-pressed="true"></button>
-        <button type="button" data-set="amber" style="background:#ffb000" aria-label="Amber theme" aria-pressed="false"></button>
-        <button type="button" data-set="cyan" style="background:#27d7ff" aria-label="Cyan theme" aria-pressed="false"></button>
-        <button type="button" data-set="magenta" style="background:#ff3df0" aria-label="Magenta theme" aria-pressed="false"></button>
-        <button type="button" data-set="paper" style="background:#f4f6f2" aria-label="Light paper theme" aria-pressed="false"></button>
-        <button type="button" class="shuffle" id="shuffle" aria-label="Random theme" title="Random theme">↻</button>
-      </div>
     </nav>
   </header>
-  <main>
-    <section id="top" aria-labelledby="name">
-      <div class="glow" aria-hidden="true"></div>
-      <div class="wrap hero">
-        <p class="prompt"><span>root@termez</span>:~$ whoami</p>
-        <h1 id="name">Og’abek Norquvvatov</h1>
-        <p class="role">Frontend developer · AI &amp; security learner</p>
+
+  <main class="wrap">
+    <section id="top">
+      <div class="glow"></div>
+      <div class="hero">
+        <div class="prompt">root@termez:~$ <span>whoami</span></div>
+        <h1>Og’abek Norquvvatov</h1>
+        <div class="role">Frontend developer · AI & security learner</div>
         <p class="value">I build fast, readable interfaces with HTML, CSS and JavaScript, and I am training myself in AI and penetration testing so what I ship is also hard to break.</p>
         <div class="cta">
-          <a class="btn primary" href="#projects">View my work</a>
-          <a class="btn ghost" href="#contact">Get in touch</a>
+          <a href="#projects" class="btn primary">View my work</a>
+          <a href="mailto:cryptotrader09122000@gmail.com" class="btn ghost">Get in touch</a>
         </div>
       </div>
     </section>
-    <section id="about" aria-labelledby="about-h">
-      <div class="wrap two">
-        <div>
-          <h2 id="about-h">About</h2>
-          <p>I am a school student in Termez, Uzbekistan, and I spent about six months in a free technology program learning frontend development, portfolio building, prompt engineering and Photoshop. Since then I build small projects to practice HTML, CSS and JavaScript.</p>
-          <p>Before code, there was chess: I won the city and regional championships in 2019 and 2021 and played in an international competition. It taught me to plan several moves ahead and stay calm under time pressure. I want to bring that to AI, cybersecurity and software development. I am preparing for the SAT and a higher IELTS score.</p>
-        </div>
+
+    <section id="about">
+      <h2>About Me</h2>
+      <div class="two">
         <dl class="term">
-          <dt>location</dt><dd>Termez, Uzbekistan</dd>
-          <dt>school</dt><dd>School No. 20, Grade 11</dd>
-          <dt>english</dt><dd>IELTS Academic 6.0 (retake planned Jan 17, 2027)</dd>
-          <dt>sat</dt><dd>preparing, test planned Mar 6, 2027</dd>
-          <dt>interests</dt><dd>AI, cybersecurity, pentesting, emerging tech</dd>
+          <dt>Location</dt>
+          <dd>Termez, Uzbekistan</dd>
+          <dt>School</dt>
+          <dd>School No. 20, Grade 11</dd>
+          <dt>English</dt>
+          <dd>IELTS Academic 6.0 (retake planned Jan 17, 2027)</dd>
+          <dt>SAT</dt>
+          <dd>Preparing, test planned Mar 6, 2027</dd>
+          <dt>Interests</dt>
+          <dd>AI, cybersecurity, pentesting, emerging tech</dd>
         </dl>
-      </div>
-    </section>
-    <section id="skills" aria-labelledby="skills-h">
-      <div class="wrap">
-        <h2 id="skills-h">Skills</h2>
-        <div class="grid c3">
-          <div class="card"><h3>Frontend</h3><ul class="tags"><li>HTML</li><li>CSS</li><li>JavaScript</li><li>Responsive layout</li></ul></div>
-          <div class="card"><h3>AI</h3><ul class="tags"><li>AI tools</li><li>Prompt engineering</li></ul></div>
-          <div class="card"><h3>Design &amp; media</h3><ul class="tags"><li>Photoshop</li><li>Digital design</li><li>Video editing</li></ul></div>
-          <div class="card"><h3>Office</h3><ul class="tags"><li>Microsoft Word</li><li>Microsoft Excel</li></ul></div>
-          <div class="card"><h3>Studying next</h3><ul class="tags"><li>Cybersecurity</li><li>Penetration testing</li><li>Software development</li></ul></div>
-          <div class="card"><h3>Languages</h3><ul class="tags"><li>Uzbek</li><li>English (IELTS 6.0)</li></ul></div>
+        <div class="card">
+          <h3>My Background</h3>
+          <p>I am a school student in Termez, Uzbekistan, and I spent about six months in a free technology program learning frontend development, portfolio building, prompt engineering and Photoshop.</p>
+          <p>Before code, there was chess: I won the city and regional championships in 2019 and 2021 and played in an international competition. It taught me to plan several moves ahead and stay calm under time pressure.</p>
         </div>
       </div>
     </section>
-    <section id="projects" aria-labelledby="proj-h">
-      <div class="wrap">
-        <h2 id="proj-h">Projects</h2>
-        <div class="grid c2">
-          <article class="card">
-            <div class="shot" role="img" aria-label="Placeholder for portfolio screenshot">[ screenshot: portfolio-home.png ]</div>
+
+    <section id="skills">
+      <h2>Skills</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Frontend</h3>
+          <ul class="tags">
+            <li>HTML</li>
+            <li>CSS</li>
+            <li>JavaScript</li>
+            <li>Responsive layout</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>AI</h3>
+          <ul class="tags">
+            <li>AI tools</li>
+            <li>Prompt engineering</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Design & Media</h3>
+          <ul class="tags">
+            <li>Photoshop</li>
+            <li>Digital design</li>
+            <li>Video editing</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <h2>Projects</h2>
+      <div class="grid">
+        <div class="card">
+          <div>
+            <img src="portfolio-home.png" alt="Personal frontend portfolio" class="shot">
             <h3>Personal frontend portfolio</h3>
-            <p>Problem: I had no single place to show skills, chess results and contact details. Result: one responsive page with five switchable color themes.</p>
-            <ul class="tags"><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
-            <div class="links"><a href="#">Live site</a><a href="#">Source</a></div>
-          </article>
-          <article class="card">
-            <div class="shot b" role="img" aria-label="Placeholder for GitHub screenshot">[ screenshot: github-profile.png ]</div>
+            <p class="muted">Problem: I had no single place to show skills, chess results and contact details. Result: one responsive page with five switchable color themes.</p>
+          </div>
+          <ul class="tags">
+            <li>HTML</li>
+            <li>CSS</li>
+            <li>JavaScript</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div>
+            <img src="github-profile.png" alt="GitHub profile" class="shot">
             <h3>GitHub profile</h3>
-            <p>Problem: practice code was scattered across folders. Result: repositories collected in one profile where I track my progress.</p>
-            <ul class="tags"><li>Git</li><li>GitHub</li></ul>
-            <div class="links"><a href="#">Profile</a></div>
-          </article>
-        </div>
-        <p class="muted" style="margin-top:var(--s3)">Video editing: no published portfolio pieces yet.</p>
-      </div>
-    </section>
-    <section id="chess" aria-labelledby="chess-h">
-      <div class="wrap">
-        <h2 id="chess-h">Chess certificates</h2>
-        <div class="certs">
-          <figure class="cert"><div class="frame"><span class="fallback">Frame01.png</span><img src="Frame01.png" alt="Certificate: 1st place, City Chess Championship 2019" loading="lazy" onerror="this.remove()"></div><figcaption><b>2019 · 1st place</b>City Chess Championship</figcaption></figure>
-          <figure class="cert"><div class="frame"><span class="fallback">Frame02.png</span><img src="Frame02.png" alt="Certificate: 1st place, Regional Chess Championship 2019" loading="lazy" onerror="this.remove()"></div><figcaption><b>2019 · 1st place</b>Regional Chess Championship</figcaption></figure>
-          <figure class="cert"><div class="frame"><span class="fallback">Frame03.png</span><img src="Frame03.png" alt="Certificate: 1st place, City Chess Championship 2021" loading="lazy" onerror="this.remove()"></div><figcaption><b>2021 · 1st place</b>City Chess Championship</figcaption></figure>
+            <p class="muted">Problem: practice code was scattered across folders. Result: repositories collected in one profile where I track my progress.</p>
+          </div>
+          <ul class="tags">
+            <li>Git</li>
+            <li>GitHub</li>
+          </ul>
         </div>
       </div>
     </section>
-    <section id="path" aria-labelledby="path-h">
-      <div class="wrap">
-        <h2 id="path-h">Journey</h2>
-        <ol class="tl">
-          <li><time>2019 – 2021</time><h3>Chess champion</h3><p>City and regional titles in both years, plus an international competition.</p></li>
-          <li><time>~6 months</time><h3>Free technology training</h3><p>Frontend development, HTML/CSS/JavaScript, portfolio building, prompt engineering, Photoshop.</p></li>
-          <li><time>Now</time><h3>School No. 20, Grade 11</h3><p>Building projects, preparing for IELTS and SAT, exploring cybersecurity.</p></li>
-          <li><time>2027</time><h3>IELTS retake and SAT</h3><p>IELTS on January 17, SAT on March 6.</p></li>
-        </ol>
-        <p class="muted">Goal: grow in AI, cybersecurity and software development, and build technology that solves real problems.</p>
+
+    <section id="chess">
+      <h2>Chess Certificates</h2>
+      <div class="grid">
+        <div class="card">
+          <img src="Frame01.png" alt="City Chess Championship 2019" class="shot">
+          <h3>City Chess Championship</h3>
+          <p class="muted">2019 · 1st place City Chess Championship</p>
+        </div>
+        <div class="card">
+          <img src="Frame02.png" alt="Regional Chess Championship 2019" class="shot">
+          <h3>Regional Chess Championship</h3>
+          <p class="muted">2019 · 1st place Regional Chess Championship</p>
+        </div>
+        <div class="card">
+          <img src="Frame03.png" alt="City Chess Championship 2021" class="shot">
+          <h3>City Chess Championship</h3>
+          <p class="muted">2021 · 1st place City Chess Championship</p>
+        </div>
       </div>
     </section>
   </main>
-  <footer id="contact">
-    <div class="wrap">
-      <p class="big">Let’s build something.</p>
-      <ul class="contact">
-        <li><a href="mailto:cryptotrader09122000@gmail.com">cryptotrader09122000@gmail.com</a></li>
-        <li><a href="#">GitHub</a></li>
-        <li>Termez, Uzbekistan</li>
-      </ul>
-      <p class="muted">© 2026 Og’abek Norquvvatov</p>
-    </div>
+
+  <footer>
+    <p>&copy; 2026 Og’abek Norquvvatov. cryptotrader09122000@gmail.com · Termez, Uzbekistan</p>
   </footer>
-  <script>
-    (function(){
-      var root = document.documentElement,
-          btns = document.querySelectorAll('[data-set]'),
-          names = ['matrix','amber','cyan','magenta','paper'],
-          canvas = document.getElementById('matrix-canvas'),
-          ctx = canvas ? canvas.getContext('2d') : null,
-          matrixInterval = null;
 
-      function getThemeAccent() {
-        return getComputedStyle(root).getPropertyValue('--accent').trim() || '#39ff88';
-      }
-
-      function initMatrixRain() {
-        if (!canvas || !ctx) return;
-        clearInterval(matrixInterval);
-        
-        var width = canvas.width = window.innerWidth;
-        var height = canvas.height = window.innerHeight;
-        var cols = Math.floor(width / 20) + 1;
-        var ypos = Array(cols).fill(0);
-
-        function draw() {
-          ctx.fillStyle = 'rgba(5, 8, 6, 0.05)';
-          ctx.fillRect(0, 0, width, height);
-          ctx.fillStyle = getThemeAccent();
-          ctx.font = '15px monospace';
-
-          ypos.forEach((y, ind) => {
-            var text = String.fromCharCode(33 + Math.random() * 96);
-            var x = ind * 20;
-            ctx.fillText(text, x, y);
-            if (y > 100 + Math.random() * 10000) ypos[ind] = 0;
-            else ypos[ind] = y + 20;
-          });
-        }
-        matrixInterval = setInterval(draw, 50);
-      }
-
-      function setTheme(t) {
-        root.setAttribute('data-theme', t);
-        btns.forEach(function(b){ b.setAttribute('aria-pressed', b.dataset.set === t); });
-        try { localStorage.setItem('theme', t); } catch(e) {}
-        
-        if (canvas) {
-          if (t !== 'paper') {
-            canvas.style.opacity = "0.15";
-            initMatrixRain();
-          } else {
-            clearInterval(matrixInterval);
-            canvas.style.opacity = "0";
-          }
-        }
-      }
-
-      window.addEventListener('resize', () => {
-        if (root.getAttribute('data-theme') !== 'paper') initMatrixRain();
-      });
-
-      btns.forEach(function(b){
-        b.addEventListener('click', function(){ setTheme(b.dataset.set); });
-      });
-
-      document.getElementById('shuffle').addEventListener('click', function(){
-        var cur = root.getAttribute('data-theme'), n;
-        do { n = names[Math.floor(Math.random() * names.length)]; } while(n === cur);
-        setTheme(n);
-      });
-
-      var saved = null;
-      try { saved = localStorage.getItem('theme'); } catch(e) {}
-      if (saved && names.indexOf(saved) > -1) {
-        setTheme(saved);
-      } else {
-        var prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
-        setTheme(prefersLight ? 'paper' : 'matrix');
-      }
-
-      if ('IntersectionObserver' in window) {
-        root.classList.add('js');
-        var io = new IntersectionObserver(function(es){
-          es.forEach(function(e){
-            if (e.isIntersecting) {
-              e.target.classList.add('in');
-              io.unobserve(e.target);
-            }
-          });
-        }, { threshold: .12 });
-
-        document.querySelectorAll('.card,.cert,.term,.tl li').forEach(function(el, i){
-          el.classList.add('reveal');
-          el.style.transitionDelay = (i % 3) * 90 + 'ms,' + (i % 3) * 90 + 'ms,0s,0s,0s';
-          io.observe(el);
-        });
-      }
-
-      var links = {};
-      document.querySelectorAll('nav li a').forEach(function(a){
-        links[a.getAttribute('href').slice(1)] = a;
-      });
-      if ('IntersectionObserver' in window) {
-        var spy = new IntersectionObserver(function(es){
-          es.forEach(function(e){
-            if (e.isIntersecting) {
-              Object.keys(links).forEach(function(k){ links[k].removeAttribute('aria-current'); });
-              var l = links[e.target.id];
-              if (l) l.setAttribute('aria-current', 'true');
-            }
-          });
-        }, { rootMargin: '-45% 0px -50% 0px' });
-        document.querySelectorAll('main section').forEach(function(s){ spy.observe(s); });
-      }
-    })();
-  </script>
 </body>
 </html>
